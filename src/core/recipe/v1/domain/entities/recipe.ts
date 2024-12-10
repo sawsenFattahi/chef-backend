@@ -1,4 +1,4 @@
-import { recipeGategory, recipeType, recipeUnit } from "../../../../utils/enum-types";  
+import { recipeGategory, recipeType, recipeUnit } from "../../../../../utils/enum-types";  
 export interface Recipe {
     id?: string;
     name: string;
