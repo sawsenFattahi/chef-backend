@@ -1,7 +1,7 @@
-import { Recipe } from "../../../../../src/core/recipe/v1/domain/entities/recipe";
-import { GetAllRecipesInterface } from "../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-all-recipes-interface";
-import { RecipeRepository } from "../../../../../src/core/recipe/v1/domain/interfaces/repositories/recipe-repository";
-import { GetAllRecipes } from "../../../../../src/core/recipe/v1/domain/use-cases/get-all-recipes";
+import { Recipe } from "../../../../../../src/core/recipe/v1/domain/entities/recipe";
+import { GetAllRecipesInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-all-recipes-interface";
+import { RecipeRepository } from "../../../../../../src/core/recipe/v1/domain/interfaces/repositories/recipe-repository";
+import { GetAllRecipes } from "../../../../../../src/core/recipe/v1/domain/use-cases/get-all-recipes";
 
 describe("GetAllRecipes", () => {
     class MockRecipeRepository implements RecipeRepository {
