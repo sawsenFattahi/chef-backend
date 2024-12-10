@@ -1,5 +1,5 @@
 import { RecipeDataSource } from "../interfaces/data-sources/recipe-data-source";
-import { DatabaseWrapper } from "../interfaces/data-sources/database-wrapper";
+import { DatabaseWrapper } from "../../../../../utils/interfaces/database-wrapper";
 import { Recipe } from "../../domain/entities/recipe";
 
 export class MongodbRecipeDataSource implements RecipeDataSource {

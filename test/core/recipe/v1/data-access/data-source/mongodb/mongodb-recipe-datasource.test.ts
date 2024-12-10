@@ -1,5 +1,5 @@
 import { MongodbRecipeDataSource } from "../../../../../../src/core/recipe/v1/data-access/data-sources/mongodb-recipe-datasource";
-import { DatabaseWrapper } from "../../../../../../src/core/recipe/v1/data-access/interfaces/data-sources/database-wrapper";
+import { DatabaseWrapper } from "../../../../../../src/utils/interfaces/database-wrapper";
 
 describe("MongodbRecipeDataSource", () => {
     let dataSource: MongodbRecipeDataSource;
