@@ -13,15 +13,17 @@ export class RecipeRepository implements RecipeRepositoryInterface {
     }
 
     async getAllRecipes(): Promise<Recipe[]> {
-        throw new Error("Method not implemented.");
+        const recipes = await this.dataSource.getAllRecipes();
+        return recipes;
     }
     async getOneRecipe(id: string): Promise<Recipe> {
-        throw new Error("Method not implemented.");
+        const recipe = await this.dataSource.getOneRecipe(id);
+        return recipe;
     }
     async updateRecipe(id: string, recipe: Recipe): Promise<Recipe> {
-        throw new Error("Method not implemented.");
+        const recipeUpdated = await this.dataSource.updateRecipe(id, recipe);
+        return recipeUpdated;
     }
     async deleteRecipe(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+        await this.dataSource.deleteRecipe(id);}
 }
