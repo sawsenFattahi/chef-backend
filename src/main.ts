@@ -1,6 +1,13 @@
-import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
 import server from "./server";
+import { MongodbRecipeDataSource } from "./core/recipe/v1/data-access/data-sources/mongodb-recipe-datasource";
+import { getMongoDataService } from "./utils/interfaces/mongdb-service";
+import recipeRouter from "./core/recipe/v1/entry-points/routers/recipe-router";
+import { GetAllRecipes } from "./core/recipe/v1/domain/use-cases/get-all-recipes";
+import { CreateRecipe } from "./core/recipe/v1/domain/use-cases/create-recipe";
+import { GetOneRecipe } from "./core/recipe/v1/domain/use-cases/get-one-recipe";
+import { DeleteRecipe } from "./core/recipe/v1/domain/use-cases/delete-recipe";
+import { UpdateRecipe } from "./core/recipe/v1/domain/use-cases/update-recipe";
 
 dotenv.config();
 
@@ -15,15 +22,18 @@ if(!process.env.MONGODB_URI) {
 }
 
 const PORT = parseInt(process.env.PORT) || 3000;
-const getMongoDataService = async () => {
-    const uri = process.env.MONGODB_URI || "";
-    const client = new MongoClient(uri);
-    await client.connect();
-    return client.db("chef-backend");
-};
+
 
 (async () => {
-    const mongodb = await getMongoDataService();
+    const dataSource = await getMongoDataService(MongodbRecipeDataSource);
+    const routes = await recipeRouter(
+        new CreateRecipe(dataSource),
+        new GetAllRecipes(dataSource),
+        new GetOneRecipe(dataSource),
+        new UpdateRecipe(dataSource),
+        new DeleteRecipe(dataSource)
+    );
+    server.use(routes);
     server.listen(PORT, () => {
         console.log(`server is listening on port: ${PORT}`);
     });
