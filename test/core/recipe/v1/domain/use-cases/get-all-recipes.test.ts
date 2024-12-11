@@ -1,10 +1,10 @@
 import { Recipe } from "../../../../../../src/core/recipe/v1/domain/entities/recipe";
 import { GetAllRecipesInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-all-recipes-interface";
-import { RecipeRepository } from "../../../../../../src/core/recipe/v1/domain/interfaces/repositories/recipe-repository";
+import { RecipeRepositoryInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/repositories/recipe-repository-interface";
 import { GetAllRecipes } from "../../../../../../src/core/recipe/v1/domain/use-cases/get-all-recipes";
 
 describe("GetAllRecipes", () => {
-    class MockRecipeRepository implements RecipeRepository {
+    class MockRecipeRepository implements RecipeRepositoryInterface {
         async createRecipe(recipe: Recipe): Promise<Recipe> {
             throw new Error("Method not implemented.");
         }
@@ -22,7 +22,7 @@ describe("GetAllRecipes", () => {
         }
     }
 
-    let mockRecipeRepository: RecipeRepository;
+    let mockRecipeRepository: RecipeRepositoryInterface;
 
     beforeAll(() => {
         jest.clearAllMocks();

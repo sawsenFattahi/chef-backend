@@ -1,5 +1,5 @@
 import { Recipe } from "../entities/recipe";
-import { RecipeRepository } from "../interfaces/repositories/recipe-repository";
+import { RecipeRepository } from "../repository/recipe-repository";
 import { GetOneRecipeInterface } from "../interfaces/use-cases/get-one-recipe-interface";
 
 export class GetOneRecipe implements GetOneRecipeInterface {

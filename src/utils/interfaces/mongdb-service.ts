@@ -6,11 +6,11 @@ export const getMongoDataService = async (DataSource: any) => {
     await client.connect();
     const db = client.db("CHEF");
     const contactDatabase = {
-        findOne: (id: String) => db.collection("recipes").findOne({ _id: id }),
+        findOne: (id: String) => db.collection("recipes").findOne({ id: id }),
         find: () => db.collection("recipes").find().toArray(),
         insertOne: (doc: object) => db.collection("recipes").insertOne(doc),
-        update: (id: String, data: object) => db.collection("recipes").updateOne({ _id: id }, data),
-        delete: (id: String) => db.collection("recipes").deleteOne({ _id: id }),
+        update: (id: String, data: object) => db.collection("recipes").updateOne({ id: id }, {$set:data}),
+        delete: (id: String) => db.collection("recipes").deleteOne({ id: id }),
     }
     return new DataSource(contactDatabase);
 };
