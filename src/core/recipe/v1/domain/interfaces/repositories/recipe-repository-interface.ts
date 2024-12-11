@@ -1,5 +1,5 @@
 import { Recipe } from "../../entities/recipe";
-export interface RecipeRepository {
+export interface RecipeRepositoryInterface {
     createRecipe: (recipe: Recipe) => Promise<Recipe>
     getAllRecipes: () => Promise<Recipe[]>
     getOneRecipe: (id: string) => Promise<Recipe>

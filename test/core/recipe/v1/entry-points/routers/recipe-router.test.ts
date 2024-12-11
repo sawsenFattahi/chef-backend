@@ -1,12 +1,12 @@
 import request from "supertest";
-import server from "../../../../../src/server";
-import recipeRouter from "../../../../../src/core/recipe/v1/entry-points/routers/recipe-router";
-import { Recipe } from "../../../../../src/core/recipe/v1/domain/entities/recipe";
-import { CreateRecipeInterface } from "../../../../../src/core/recipe/v1/domain/interfaces/use-cases/create-recipe-interface";
-import { GetAllRecipesInterface } from "../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-all-recipes-interface";
-import { GetOneRecipeInterface } from "../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-one-recipe-interface";
-import { UpdateRecipeInterface } from "../../../../../src/core/recipe/v1/domain/interfaces/use-cases/update-recipe-interface";
-import { DeleteRecipeInterface } from "../../../../../src/core/recipe/v1/domain/interfaces/use-cases/delete-recipe-interface";
+import server from "../../../../../../src/server";
+import recipeRouter from "../../../../../../src/core/recipe/v1/entry-points/routers/recipe-router";
+import { Recipe } from "../../../../../../src/core/recipe/v1/domain/entities/recipe";
+import { CreateRecipeInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/create-recipe-interface";
+import { GetAllRecipesInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-all-recipes-interface";
+import { GetOneRecipeInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/get-one-recipe-interface";
+import { UpdateRecipeInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/update-recipe-interface";
+import { DeleteRecipeInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/delete-recipe-interface";
 
 class MockCreateRecipe implements CreateRecipeInterface {
     execute(recipe: Recipe): Promise<Recipe> {

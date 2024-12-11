@@ -1,4 +1,4 @@
-import { RecipeRepository } from "../interfaces/repositories/recipe-repository";
+import { RecipeRepository } from "../repository/recipe-repository";
 import { DeleteRecipeInterface } from "../interfaces/use-cases/delete-recipe-interface";
 
 export class DeleteRecipe implements DeleteRecipeInterface {

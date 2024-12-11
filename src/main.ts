@@ -8,6 +8,7 @@ import { CreateRecipe } from "./core/recipe/v1/domain/use-cases/create-recipe";
 import { GetOneRecipe } from "./core/recipe/v1/domain/use-cases/get-one-recipe";
 import { DeleteRecipe } from "./core/recipe/v1/domain/use-cases/delete-recipe";
 import { UpdateRecipe } from "./core/recipe/v1/domain/use-cases/update-recipe";
+import { RecipeRepository } from "./core/recipe/v1/domain/repository/recipe-repository";
 
 dotenv.config();
 
@@ -27,11 +28,11 @@ const PORT = parseInt(process.env.PORT) || 3000;
 (async () => {
     const dataSource = await getMongoDataService(MongodbRecipeDataSource);
     const routes = await recipeRouter(
-        new CreateRecipe(dataSource),
-        new GetAllRecipes(dataSource),
-        new GetOneRecipe(dataSource),
-        new UpdateRecipe(dataSource),
-        new DeleteRecipe(dataSource)
+        new CreateRecipe(new RecipeRepository(dataSource)),
+        new GetAllRecipes(new RecipeRepository(dataSource)),
+        new GetOneRecipe(new RecipeRepository(dataSource)),
+        new UpdateRecipe(new RecipeRepository(dataSource)),
+        new DeleteRecipe(new RecipeRepository(dataSource)),
     );
     server.use(routes);
     server.listen(PORT, () => {

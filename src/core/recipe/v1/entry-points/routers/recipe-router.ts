@@ -1,12 +1,12 @@
 import express from "express";
-import { CreateRecipeInterface } from "../../domain/interfaces/use-cases/create-recipe-interface";
 import { DeleteRecipeInterface } from "../../domain/interfaces/use-cases/delete-recipe-interface";
 import { GetAllRecipesInterface } from "../../domain/interfaces/use-cases/get-all-recipes-interface";
 import { GetOneRecipeInterface } from "../../domain/interfaces/use-cases/get-one-recipe-interface";
 import { UpdateRecipeInterface } from "../../domain/interfaces/use-cases/update-recipe-interface";
+import { CreateRecipe } from "../../domain/use-cases/create-recipe";
 
 export default function recipeRouter(
-    createRecipe: CreateRecipeInterface,
+    createRecipe: CreateRecipe,
     getAllRecipes: GetAllRecipesInterface,
     getOneRecipe: GetOneRecipeInterface,
     updateRecipe: UpdateRecipeInterface,

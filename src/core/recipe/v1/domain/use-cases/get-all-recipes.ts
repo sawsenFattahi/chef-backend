@@ -1,10 +1,10 @@
 import { Recipe } from "../entities/recipe";
-import { RecipeRepository } from "../interfaces/repositories/recipe-repository";
+import { RecipeRepositoryInterface } from "../interfaces/repositories/recipe-repository-interface";
 import { GetAllRecipesInterface } from "../interfaces/use-cases/get-all-recipes-interface";
 
 export class GetAllRecipes implements GetAllRecipesInterface {
-    recipeRepository: RecipeRepository;
-    constructor(recipeRepository: RecipeRepository) {
+    recipeRepository: RecipeRepositoryInterface;
+    constructor(recipeRepository: RecipeRepositoryInterface) {
         this.recipeRepository = recipeRepository;
     }
 
