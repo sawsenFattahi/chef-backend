@@ -1,16 +1,16 @@
 import express from "express";
-import { DeleteRecipeInterface } from "../../domain/interfaces/use-cases/delete-recipe-interface";
-import { GetAllRecipesInterface } from "../../domain/interfaces/use-cases/get-all-recipes-interface";
-import { GetOneRecipeInterface } from "../../domain/interfaces/use-cases/get-one-recipe-interface";
-import { UpdateRecipeInterface } from "../../domain/interfaces/use-cases/update-recipe-interface";
 import { CreateRecipe } from "../../domain/use-cases/create-recipe";
+import { GetAllRecipes } from "../../domain/use-cases/get-all-recipes";
+import { GetOneRecipe } from "../../domain/use-cases/get-one-recipe";
+import { UpdateRecipe } from "../../domain/use-cases/update-recipe";
+import { DeleteRecipe } from "../../domain/use-cases/delete-recipe";
 
 export default function recipeRouter(
     createRecipe: CreateRecipe,
-    getAllRecipes: GetAllRecipesInterface,
-    getOneRecipe: GetOneRecipeInterface,
-    updateRecipe: UpdateRecipeInterface,
-    deleteRecipe: DeleteRecipeInterface) {
+    getAllRecipes: GetAllRecipes,
+    getOneRecipe: GetOneRecipe,
+    updateRecipe: UpdateRecipe,
+    deleteRecipe: DeleteRecipe) {
     const router = express.Router();
 
     router.post("/v1/", async (req, res) => {
