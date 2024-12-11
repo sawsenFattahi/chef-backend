@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --collectCoverage",
-    "dev": "ts-node-dev --pretty --respawn ./src/server.ts"
+    "dev": "ts-node-dev --pretty --respawn ./src/main.ts"
   },
   "keywords": [],
   "author": "",
