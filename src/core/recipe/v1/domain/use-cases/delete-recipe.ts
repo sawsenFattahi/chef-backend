@@ -1,9 +1,9 @@
-import { RecipeRepository } from "../repository/recipe-repository";
 import { DeleteRecipeInterface } from "../interfaces/use-cases/delete-recipe-interface";
+import { RecipeRepositoryInterface } from "../interfaces/repositories/recipe-repository-interface";
 
 export class DeleteRecipe implements DeleteRecipeInterface {
-    recipeRepository: RecipeRepository;
-    constructor(recipeRepository: RecipeRepository) {
+    recipeRepository: RecipeRepositoryInterface;
+    constructor(recipeRepository: RecipeRepositoryInterface) {
         this.recipeRepository = recipeRepository;
     }
 

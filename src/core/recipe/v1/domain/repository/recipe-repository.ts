@@ -8,6 +8,7 @@ export class RecipeRepository implements RecipeRepositoryInterface {
         this.dataSource = dataSource;
     }
     async createRecipe(recipe: Recipe): Promise<Recipe> { 
+        console.log('from repository');
         const recipeCreated = await this.dataSource.createRecipe(recipe);
         return recipeCreated;
     }
