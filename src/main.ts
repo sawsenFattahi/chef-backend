@@ -34,7 +34,7 @@ const PORT = parseInt(process.env.PORT) || 3000;
         new UpdateRecipe(new RecipeRepository(dataSource)),
         new DeleteRecipe(new RecipeRepository(dataSource)),
     );
-    server.use(routes);
+    server.use('/recipe', routes);
     server.listen(PORT, () => {
         console.log(`server is listening on port: ${PORT}`);
     });

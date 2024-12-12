@@ -3,13 +3,11 @@ export interface Recipe {
     id?: string;
     name: string;
     description: string;
-    ingredients: Recipe[];
     quantity: number;
-    unit: recipeUnit;
-    category: recipeGategory;
-    type: recipeType;
+    unit: string;
+    category: string;
+    type: string;
     image: string;
-    createdAt: Date;
-    updatedAt: Date;
+ 
 }
 

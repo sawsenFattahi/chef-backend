@@ -8,66 +8,95 @@ import { GetOneRecipeInterface } from "../../../../../../src/core/recipe/v1/doma
 import { UpdateRecipeInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/update-recipe-interface";
 import { DeleteRecipeInterface } from "../../../../../../src/core/recipe/v1/domain/interfaces/use-cases/delete-recipe-interface";
 
-class MockCreateRecipe implements CreateRecipeInterface {
+
+class MockCreatRecipeUseCase implements CreateRecipeInterface {
     execute(recipe: Recipe): Promise<Recipe> {
-        throw new Error("Method not implemented.");
-    };
+        throw new Error("Method not implemented."); 
+    }       
 }
-
-class MockGetAllRecipes implements GetAllRecipesInterface {
-    execute() : Promise<Recipe[]> {
-        throw new Error("Method not implemented.");
-    }    
+class MockGetAllRecipesUseCase implements GetAllRecipesInterface {
+    execute(): Promise<Recipe[]> {
+        throw new Error("Method not implemented."); 
+    }       
 }
-
-class MockGetOneRecipe implements GetOneRecipeInterface {
+class MockGetOneRecipeUseCase implements GetOneRecipeInterface {
     execute(id: string): Promise<Recipe> {
-        throw new Error("Method not implemented.");
-    }
+        throw new Error("Method not implemented."); 
+    }       
 }
-
-class MockUpdateRecipe implements UpdateRecipeInterface {
+class MockUpdateRecipeUseCase implements UpdateRecipeInterface {
     execute(id: string, recipe: Recipe): Promise<Recipe> {
-        throw new Error("Method not implemented.");
-    }
+        throw new Error("Method not implemented."); 
+    }       
+}
+class MockDeleteRecipeUseCase implements DeleteRecipeInterface {
+    execute(id: string): Promise<void> {
+        throw new Error("Method not implemented."); 
+    }                               
 }
 
-class MockDeleteRecipe implements DeleteRecipeInterface {
-    execute(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-}
+jest.useRealTimers();
 
 describe("recipeRouter", () => {
-    const createRecipe = new MockCreateRecipe();
-    const getAllRecipes = new MockGetAllRecipes();
-    const getOneRecipe = new MockGetOneRecipe();
-    const updateRecipe = new MockUpdateRecipe();
-    const deleteRecipe = new MockDeleteRecipe();
+    let mockCreatRecipeUseCase: CreateRecipeInterface;
+    let mockGetAllRecipesUseCase: GetAllRecipesInterface;
+    let mockGetOneRecipeUseCase: GetOneRecipeInterface;
+    let mockUpdateRecipeUseCase: UpdateRecipeInterface;
+    let mockDeleteRecipeUseCase: DeleteRecipeInterface;
 
     beforeAll(() => {
-        server.use(recipeRouter(createRecipe, getAllRecipes, getOneRecipe, updateRecipe, deleteRecipe));
+        mockCreatRecipeUseCase = new MockCreatRecipeUseCase();
+        mockGetAllRecipesUseCase = new MockGetAllRecipesUseCase();
+        mockGetOneRecipeUseCase = new MockGetOneRecipeUseCase();
+        mockUpdateRecipeUseCase = new MockUpdateRecipeUseCase();
+        mockDeleteRecipeUseCase = new MockDeleteRecipeUseCase();
+        const routes = recipeRouter(
+            mockCreatRecipeUseCase,
+            mockGetAllRecipesUseCase,
+            mockGetOneRecipeUseCase,
+            mockUpdateRecipeUseCase,
+            mockDeleteRecipeUseCase,    
+        );
+        server.use('/recipe', routes);
     });
 
     beforeEach(() => {
         jest.clearAllMocks();
+        jest.useRealTimers();
     });
 
-    it("should create a recipe", async () => {
-        const recipe = {
-            name: "test",
-            description: "test",
-            ingredients: [],
-            quantity: 1,
-            unit: "g",
-            category: "entree",
-            type: "Primary",
-            image: "test",
-            createdAt: new Date(),
-            updatedAt: new Date()
-        };
-        const response = await request(server).post("/").send(recipe);
-        expect(response.status).toBe(201);
-    });
+    describe("GET /recipe", () => {
+
+        test("should return 200 with data", async () => {
+            const ExpectedData = [
+                {
+                    id: "1",
+                    name: "cookies",
+                    description: "string",
+                    quantity: 4,
+                    unit: "g",
+                    category: "entree",
+                    type: "Primary",
+                    image: "string",
+                    createdAt: "string",
+                    updatedAt: "string"
+                }
+            ];
+            const rec : Recipe [] = ExpectedData;
+            jest.spyOn(mockGetAllRecipesUseCase, "execute").mockImplementation(() => Promise.resolve(rec));
+            const response = await request(server).get("/recipe/v1/");
+            expect(response.status).toBe(200);
+            expect(mockGetAllRecipesUseCase.execute).toBeCalledTimes(1);
+            expect(response.body).toStrictEqual(ExpectedData);
+
+        });
+
+        test("GET /contact returns 500 on use case error", async () => {
+            jest.spyOn(mockGetAllRecipesUseCase, "execute").mockImplementation(() => Promise.reject(Error()));
+            const response = await request(server).get("/recipe/v1/");
+            expect(response.status).toBe(500);
+            expect(response.body).toStrictEqual({ message: "Error fetching data" });
+        });
+    })
 }); 
 

@@ -1,10 +1,10 @@
 import { Recipe } from "../entities/recipe";
-import { RecipeRepository } from "../repository/recipe-repository";
 import { CreateRecipeInterface } from "../interfaces/use-cases/create-recipe-interface";
+import { RecipeRepositoryInterface } from "../interfaces/repositories/recipe-repository-interface";
 
 export class CreateRecipe implements CreateRecipeInterface {
-    recipeRepository: RecipeRepository;
-    constructor(recipeRepository: RecipeRepository) {
+    recipeRepository: RecipeRepositoryInterface;
+    constructor(recipeRepository: RecipeRepositoryInterface) {
         this.recipeRepository = recipeRepository;
     }
     async execute(recipe: Recipe): Promise<Recipe> {
